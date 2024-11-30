@@ -1,10 +1,17 @@
 from django import forms
-from models import Hierarchy, Value, Product, Sale
+from django.db.models import Q
+from .models import Hierarchy, Value, Product, Sale
 
 
 class HierarchyForm(forms.ModelForm):
     """Form definition for Hierarchy."""
     hierar_sup = forms.ModelChoiceField(queryset=Hierarchy.objects.all(), label='Jerarquía Superior', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
     
     class Meta:
         """Meta definition for Hierarchyform."""
@@ -23,6 +30,12 @@ class ValueForm(forms.ModelForm):
     val_sup = forms.ModelChoiceField(queryset=Value.objects.all(), label='Valor Superior', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
     hierar_id = forms.ModelChoiceField(queryset=Hierarchy.objects.all(), label='Jerarquía', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+    
     class Meta:
         """Meta definition for Valueform."""
 
@@ -38,10 +51,16 @@ class ValueForm(forms.ModelForm):
 
 class ProductForm(forms.ModelForm):
     """Form definition for Product."""
-    id_product = forms.ModelChoiceField(queryset=Value.objects.all(), label='Tipo Producto', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
-    id_category = forms.ModelChoiceField(queryset=Value.objects.all(), label='Categoría', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
-    id_brand = forms.ModelChoiceField(queryset=Value.objects.all(), label='Marca', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
-
+    id_product = forms.ModelChoiceField(queryset=Value.objects.filter(Q(hierar_id=10) | Q(hierar_id=0)), label='Tipo Producto', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
+    id_category = forms.ModelChoiceField(queryset=Value.objects.filter(Q(hierar_id=11) | Q(hierar_id=0)), label='Categoría', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
+    id_brand = forms.ModelChoiceField(queryset=Value.objects.filter(Q(hierar_id=12) | Q(hierar_id=0)), label='Marca', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+    
     class Meta:
         """Meta definition for Productform."""
 
@@ -61,7 +80,13 @@ class ProductForm(forms.ModelForm):
 class SaleForm(forms.ModelForm):
     """Form definition for Sale."""
     product_id = forms.ModelChoiceField(queryset=Product.objects.all(), label='Producto', empty_label=None, required=True, widget=forms.Select(attrs={'class':'form-control'}))
-
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+    
     class Meta:
         """Meta definition for Saleform."""
 
