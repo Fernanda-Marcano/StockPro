@@ -1,0 +1,76 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}  
+
+
+{% block head %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'librerias/DataTables/datatables.min.css' %}">
+    <script src="{% static 'librerias/DataTables/datatables.min.js' %}"></script>
+{% endblock head %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Icono</th>
+                    <th>Superior</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hierar in list_hierarchy %}
+                    <tr>
+                        <td>{{ hierar.hierar_id }}</td>
+                        <td>{{ hierar.hierar_name }}</td>
+                        <td>{{ hierar.hierar_description }}</td>
+                        <td>{{ hierar.hierar_icon }}</td>
+                        <td>{{ hierar.hierar_sup }}</td>
+                        <td><a href="{% url 'list-value-id' pk=hierar.hierar_id %}">lista</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}   
+
+
+{% block scripts %}
+    <script type="application/javascript">
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                responsive:true,
+                dom: '<"top"lfB>rt<"bottom"ip><"clear">',
+                buttons: [
+                    {
+                        extend:'pdfHtml5',
+                        text:'<i class="bi bi-file-pdf-fill"></i>',
+                        className:'btn-pdf'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="bi bi-file-excel-fill"></i>',
+                        className: 'btn-excel'
+                    }, 
+                    {
+                        extend:'copyHtml5',
+                        text: '<i class="bi bi-copy"></i>',
+                        className: 'btn-copy',
+                    }
+                ],
+                "language":{
+                    url:'{% static "librerias/Datatables/spanish.txt" %}'
+                }
+            });
+        } );
+    </script>
+{% endblock scripts %}    

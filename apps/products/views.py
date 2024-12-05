@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View, CreateView, UpdateView, DetailView, ListView
+from django.db.models import Q
 
 from .models import Hierarchy, Value, Product, Sale
 from .forms import HierarchyForm, ValueForm, ProductForm, SaleForm
@@ -34,7 +35,7 @@ class HierarchyListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = {}
-        context['l_hierarchy'] = self.get_queryset()
+        context['list_hierarchy'] = self.get_queryset()
         context['title'] = 'Lista de Jerarquías'
         return context
 
@@ -81,8 +82,25 @@ class ValueListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = {}
-        context['list_value'] = self.queryset()
+        context['list_value'] = self.get_queryset()
         context['title'] = 'lista de valores'
+        return context
+
+
+class ValueListIdView(ListView): 
+    model = Value 
+    template_name = "value/list.html" 
+    def get_queryset(self): 
+        pk = self.kwargs.get('pk') 
+        queryset = self.model.objects.filter(hierar_id=pk)
+        return queryset 
+    
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs) 
+        pk = self.kwargs.get('pk') 
+        context['list_value'] = self.get_queryset() 
+        context['title'] = 'lista de valores' 
+        context['val_hierar'] = Hierarchy.objects.get(hierar_id=pk)
         return context
 
 

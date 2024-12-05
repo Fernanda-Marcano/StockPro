@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'librerias/bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'librerias/bootstrap-icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'template_bootstrap/css/style.css' %}">
+    
+    <title>StockPro | {% block title %}{% endblock title %}</title>
+    
+    {% block head %}
+        
+    {% endblock head %}
+</head>
+<body>
+    {% include 'layouts/partials/navbar.html' %}
+    {% include 'layouts/partials/sidebar.html' %}
+
+    <main class="main" id="main">
+        {% block content %}
+            
+        {% endblock content %}
+    </main>
+
+
+    {% include 'layouts/partials/footer.html' %}
+    
+    {% block scripts %}
+        
+    {% endblock scripts %}
+    <script src="{% static 'librerias/bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'librerias/bootstrap/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'template_bootstrap/js/main.js' %}"></script>
+</body>
+</html>

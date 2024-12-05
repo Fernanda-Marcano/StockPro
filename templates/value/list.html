@@ -1,0 +1,93 @@
+{% extends '../layouts/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}  
+
+
+{% block head %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'librerias/DataTables/datatables.min.css' %}">
+    <script src="{% static 'librerias/DataTables/datatables.min.js' %}"></script>
+{% endblock head %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="card-header d-flex align-items-center h5">
+            {% if val_hierar %}
+                <i class="{{ val_hierar.hierar_icon }}" style="font-size: 2em;"></i>&nbsp;&nbsp; {{ val_hierar.hierar_name|upper }}
+            {% else %}
+                <i class="bi bi-home" style="font-size: 2em;"></i>&nbsp;&nbsp; {{ title | upper}}   
+            {% endif %}
+        </div>
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Superior</th>
+                    {% if not val_hierar %}
+                        <th>Jerarquia</th>
+                    {% endif %}
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Icono</th>
+                    <th>Orden</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for value in list_value %}
+                    
+                    {% if value.val_id != 0 %}
+                        <tr>
+                            {% if not val_hierar %}
+                                <td>{{ value.hierar_id }}</td>
+                            {% endif %}
+                                
+                            <td>{{ value.val_id }}</td>
+                            <td>{{ value.val_sup }}</td>
+                            <td>{{ value.val_name }}</td>
+                            <td>{{ value.val_description }}</td>
+                            <td>{{ value.val_icon }}</td>
+                            <td>{{ value.val_order | default:"-" }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}   
+
+
+{% block scripts %}
+    <script type="application/javascript">
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                responsive:true,
+                dom: '<"top"lfB>rt<"bottom"ip><"clear">',
+                buttons: [
+                    {
+                        extend:'pdfHtml5',
+                        text:'<i class="bi bi-file-pdf-fill"></i>',
+                        className:'btn-pdf'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="bi bi-file-excel-fill"></i>',
+                        className: 'btn-excel'
+                    }, 
+                    {
+                        extend:'copyHtml5',
+                        text: '<i class="bi bi-copy"></i>',
+                        className: 'btn-copy',
+                    }
+                ],
+                "language":{
+                    url:'{% static "librerias/Datatables/spanish.txt" %}'
+                }
+            });
+        } );
+    </script>
+{% endblock scripts %}    
