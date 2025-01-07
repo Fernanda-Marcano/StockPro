@@ -33,6 +33,7 @@
                     <th>Descripcion</th>
                     <th>Icono</th>
                     <th>Orden</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +51,10 @@
                             <td>{{ value.val_description }}</td>
                             <td>{{ value.val_icon }}</td>
                             <td>{{ value.val_order | default:"-" }}</td>
+                            <td>
+                                <a href="{% url 'update-value' value.val_id %}" title="Editar({{value.val_name}})"><i class="bi bi-pencil-square text-dark" style="font-size: 20px;"></i></a>
+                                <a href="#" title="Eliminar({{value.val_name}})"><i class="bi bi-trash-fill text-dark" style="font-size: 20px;"></i></a>
+                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}

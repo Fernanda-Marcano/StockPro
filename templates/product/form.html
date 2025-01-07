@@ -3,5 +3,50 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-    
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">{{ title }}</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_product.id_product.label_tag }}
+                    {{ form_product.id_product }}
+                    {{ form_product.id_brand.label_tag }}
+                    {{ form_product.id_brand }}
+                    {{ form_product.pdt_description.label_tag }}
+                    {{ form_product.pdt_description }}
+
+                </div>
+                <div class="col-md-6">
+                    {{ form_product.id_category.label_tag }}
+                    {{ form_product.id_category }}
+                    {{ form_product.pdt_model.label_tag }}
+                    {{ form_product.pdt_model }}
+                    {{ form_product.pdt_name.label_tag }}
+                    {{ form_product.pdt_name }}
+                    {{ form_product.pdt_serial.label_tag }}
+                    {{ form_product.pdt_serial }}
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_product.pdt_stock.label_tag }}
+                            {{ form_product.pdt_stock }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_product.pdt_price.label_tag }}
+                            {{ form_product.pdt_price }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_product.pdt_image.label_tag }}
+                            {{ form_product.pdt_image }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="send">
+        </form>
+    </div>
+</div>
 {% endblock content %}

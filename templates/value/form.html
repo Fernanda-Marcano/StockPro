@@ -3,9 +3,21 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-    
-    {% for value in form_value %}
-        {{ value }}
-    {% endfor %}
+    <div class="card w-50">
+        <h3 class="card-title">{{ title }}</h3>
+        <div class="card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    {% for value in form_value %}
+                        <div class="col-md-12">
+                            {{ value.label_tag }}
+                            {{ value }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
     
 {% endblock content %}

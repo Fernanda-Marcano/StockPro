@@ -37,6 +37,8 @@ class HierarchyListView(ListView):
         context = {}
         context['list_hierarchy'] = self.get_queryset()
         context['title'] = 'Lista de Jerarquías'
+        context['title2'] = 'crear jerarquía'
+        context['form_hierarchy'] = HierarchyForm()
         return context
 
 
@@ -127,7 +129,7 @@ class ValueUpdateView(UpdateView):
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    template_name = "product/create.html"
+    template_name = "product/form.html"
     
     def get_context_data(self, **kwargs):
         context = {}

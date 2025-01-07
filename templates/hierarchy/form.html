@@ -3,9 +3,24 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-    
-    {% for hierar in form_hierarchy %}
-        {{ hierar }}
-    {% endfor %}
+    <div class="card w-50">
+        <div class="card-body">
+            <h3 class="card-title">{{ title }}</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for hierar in form_hierarchy %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ hierar.label_tag }}
+                            {{ hierar }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="inputs">
+                    <input type="submit" value="{{ title }}">
+                </div>
+            </form>
+        </div>
+    </div>
     
 {% endblock content %}

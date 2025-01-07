@@ -1,0 +1,11 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}{{title | upper}}{% endblock title %}
+
+{% block content %}
+    <ul>
+        {% for val in list_product %}
+            <li>{{ val }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
