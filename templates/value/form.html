@@ -9,13 +9,19 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="row">
-                    {% for value in form_value %}
-                        <div class="col-md-12">
-                            {{ value.label_tag }}
-                            {{ value }}
-                        </div>
-                    {% endfor %}
-                </div>
+                    <div class="col-md-12">
+                        {% if form_value.hierar_id.value %} 
+                            {% for value in form_value %}
+                                {{ value.label_tag }}
+                                {{ value }}
+                            {% endfor %}
+                        {% else %}
+                            {% for value in form_value %}
+                                {{ value.label_tag}}
+                                {{ value }} 
+                            {% endfor %}
+                        {% endif %}
+                    </div>
             </form>
         </div>
     </div>

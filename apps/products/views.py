@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, CreateView, UpdateView, DetailView, ListView
 from django.db.models import Q
 
@@ -7,7 +8,7 @@ from .forms import HierarchyForm, ValueForm, ProductForm, SaleForm
 
 
 #* ------------- Definition of views Hierarchy --------------- *#
-class HierarchyCreateView(CreateView):
+class HierarchyCreateView(LoginRequiredMixin,CreateView):
     model = Hierarchy
     form_class = HierarchyForm
     template_name = "hierarchy/form.html"
@@ -72,6 +73,24 @@ class ValueCreateView(CreateView):
         if form.is_valid():
             form.save()
             return redirect(to='list-hierarchy')
+
+class ValueCreateIdView(CreateView):
+    model = Value
+    form_class = ValueForm
+    template_name = "value/form.html"
+    
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        query = self.model.objects.filter(hierar_id=pk)
+        return query
+    
+    def get_context_data(self, **kwargs):
+        context = {}
+        pk = self.kwargs.get('pk')
+        context['title'] = 'Crear valor de jerarquia'
+        context['val_hierar'] = Hierarchy.objects.get(hierar_id=pk)
+        context['form_value'] = self.form_class(initial={'hierar_id': context['val_hierar']})
+        return context
 
 
 class ValueListView(ListView):

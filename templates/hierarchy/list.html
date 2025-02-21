@@ -35,7 +35,7 @@
                     <td>{{ hierar.hierar_icon }}</td>
                     <td>{{ hierar.hierar_sup }}</td>
                     <td>
-                        <a href="#" title="Agregar({{hierar.hierar_name}})"><i class="bi bi-file-plus-fill text-dark" style="font-size: 20px;"></i></a>
+                        <a href="{% url 'create-value-id' pk=hierar.hierar_id %}" title="Agregar({{hierar.hierar_name}})"><i class="bi bi-file-plus-fill text-dark" style="font-size: 20px;"></i></a>
                         <a href="{% url 'list-value-id' pk=hierar.hierar_id %}"
                             title="Lista de ({{hierar.hierar_name}})"><i class="bi bi-card-list text-dark" style="font-size: 20px;"></i></a>
                         <a href="{% url 'update-hierarchy' pk=hierar.hierar_id %}"

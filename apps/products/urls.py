@@ -9,6 +9,7 @@ urlpatterns = [
     
     #* ================= VALUE URLS ================== *#
     path('create-val/', views.ValueCreateView.as_view(), name='create-value'), 
+    path('create-val-id/<int:pk>/', views.ValueCreateIdView.as_view(), name='create-value-id'),
     path('list-val/', views.ValueListView.as_view(), name='list-value'),
     path('list-val-id/<int:pk>/', views.ValueListIdView.as_view(), name='list-value-id'),
     path('update-val/<int:pk>/', views.ValueUpdateView.as_view(), name='update-value'),
