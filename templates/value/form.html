@@ -3,27 +3,34 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-    <div class="card w-50">
-        <h3 class="card-title">{{ title }}</h3>
-        <div class="card-body">
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-12">
-                        {% if form_value.hierar_id.value %} 
-                            {% for value in form_value %}
-                                {{ value.label_tag }}
-                                {{ value }}
-                            {% endfor %}
-                        {% else %}
-                            {% for value in form_value %}
-                                {{ value.label_tag}}
-                                {{ value }} 
-                            {% endfor %}
-                        {% endif %}
+<div class="container">
+    <div class="content d-flex justify-content-center py-1">
+        <div class="card w-50 style_card">
+            <h3 class="card-title style_title">{{ title }}</h3>
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if form_value.hierar_id.value %} 
+                                {% for value in form_value %}
+                                    {{ value.label_tag }}
+                                    {{ value }}
+                                {% endfor %}
+                            {% else %}
+                                {% for value in form_value %}
+                                    {{ value.label_tag}}
+                                    {{ value }} 
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    <div class="style_button">
+                        <button type="submit"><i class="bi bi-send-plus-fill" style="font-size: 1.2rem;"></i> {{ title }}</button>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+</div>
     
 {% endblock content %}

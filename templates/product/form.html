@@ -3,9 +3,9 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-<div class="card">
+<div class="card style_card">
     <div class="card-body">
-        <h3 class="card-title">{{ title }}</h3>
+        <h3 class="card-title style_title">{{ title }}</h3>
         <form action="" method="post">
             {% csrf_token %}
             <div class="row">
@@ -45,7 +45,10 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" value="send">
+            <div class="style_button">
+                <button type="submit"><i class="bi bi-send-plus-fill" style="font-size: 1.2rem;"></i> {{ title }}</button>
+            </div>
+            
         </form>
     </div>
 </div>

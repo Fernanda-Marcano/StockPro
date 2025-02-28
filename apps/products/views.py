@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, CreateView, UpdateView, DetailView, ListView
@@ -8,7 +9,7 @@ from .forms import HierarchyForm, ValueForm, ProductForm, SaleForm
 
 
 #* ------------- Definition of views Hierarchy --------------- *#
-class HierarchyCreateView(LoginRequiredMixin,CreateView):
+class HierarchyCreateView(CreateView):
     model = Hierarchy
     form_class = HierarchyForm
     template_name = "hierarchy/form.html"
@@ -42,11 +43,17 @@ class HierarchyListView(ListView):
         context['form_hierarchy'] = HierarchyForm()
         return context
 
+def HierarchyDeleteView(request, pk):
+    hierar = Hierarchy.objects.get(hierar_id = pk)
+    hierar.delete()
+    return redirect(to='list-hierarchy')
+
 
 class HierarchyUpdateView(UpdateView):
     model = Hierarchy
     form_class = HierarchyForm
     template_name = "hierarchy/form.html"
+    success_url = reverse_lazy('list-hierarchy')
     
     def get_context_data(self, **kwargs):
         context = {}

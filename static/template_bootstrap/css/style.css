@@ -15,8 +15,8 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
-  color: #444444;
+  background: #012044bb;
+  color: #f1f1f1;
 }
 
 a {
@@ -372,7 +372,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #f1f1f1;
   font-family: "Nunito", sans-serif;
 }
 
@@ -381,7 +381,7 @@ h6 {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #061735;
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -391,7 +391,7 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #f1f1f1;
 }
 
 .header .search-bar {
@@ -428,19 +428,20 @@ h6 {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #012970;
-  border: 1px solid rgba(1, 41, 112, 0.2);
+  color: #f1f1f1;
+  border: 1px solid rgba(228, 230, 235, 0.2);
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
   transition: 0.3s;
   width: 100%;
+  background-color: transparent;
 }
 
 .header .search-form input:focus,
 .header .search-form input:hover {
   outline: none;
-  box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
-  border: 1px solid rgba(1, 41, 112, 0.3);
+  box-shadow: 0 0 10px 0 rgba(237, 237, 238, 0.15);
+  border: 1px solid rgba(228, 230, 235, 0.2);
 }
 
 .header .search-form button {
@@ -451,7 +452,7 @@ h6 {
 }
 
 .header .search-form button i {
-  color: #012970;
+  color: #f1f1f1;
 }
 
 /*--------------------------------------------------------------
@@ -468,13 +469,13 @@ h6 {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #f1f1f1;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #f1f1f1;
 }
 
 .header-nav .nav-profile img {
@@ -610,7 +611,7 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #050d3f;
 }
 
 @media (max-width: 1199px) {
@@ -684,9 +685,9 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #f1f1f1;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #dce4e998;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -694,25 +695,25 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #ffffff;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #012970;
-  background: #fff;
+  color: #f1f1f1;
+  background: #dce4e998;
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #899bbd;
+  color: #f1f1f1;
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #0a1a83;
+  background: #c9ccd1;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #0a1a83;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -735,7 +736,7 @@ h6 {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #012970;
+  color: #d8dde6;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -750,7 +751,7 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #ffffff;
 }
 
 .sidebar-nav .nav-content a.active i {

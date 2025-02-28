@@ -30,7 +30,7 @@
 
 <!-- Modal Edit -->
 <div class="modal fade" id="editHierarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="editHierarchy" action="#" method="post" enctype="multipart/form-data">
+    <form id="editHierarchy" action="{% url 'update-hierarchy' pk=0 %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="modal-dialog">
             <div class="modal-content">
@@ -39,7 +39,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {% for hierar in form_hierarch %}
+                    {% for hierar in form_hierarchy %}
                     <div class="row">
                         <div class="col-md-12">
                             {{ hierar.label_tag }}

@@ -12,56 +12,59 @@
 
 
 {% block content %}
-<div class="card">
-    <div class="card-body">
-        <div class="card-header d-flex align-items-center h5">
-            {% if val_hierar %}
-                <i class="{{ val_hierar.hierar_icon }}" style="font-size: 2em;"></i>&nbsp;&nbsp; {{ val_hierar.hierar_name|upper }}
-            {% else %}
-                <i class="bi bi-home" style="font-size: 2em;"></i>&nbsp;&nbsp; {{ title | upper}}   
-            {% endif %}
+<div class="container">
+    <div class="card style_card_list">
+        <div class="card-body">
+            <div class="card-header d-flex align-items-center h5 style_title_list">
+                {% if val_hierar %}
+                    <i class="{{ val_hierar.hierar_icon }}" style="font-size: 2em; "></i>&nbsp;&nbsp; {{ val_hierar.hierar_name|upper }}
+                {% else %}
+                    <i class="bi bi-list-columns" style="font-size: 1.5em;"></i>&nbsp;&nbsp; {{ title | upper}}   
+                {% endif %}
+            </div>
+            <table id="myTable" class="display">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Superior</th>
+                        {% if not val_hierar %}
+                            <th>Jerarquia</th>
+                        {% endif %}
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Icono</th>
+                        <th>Orden</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for value in list_value %}
+                        
+                        {% if value.val_id != 0 %}
+                            <tr>
+                                {% if not val_hierar %}
+                                    <td>{{ value.hierar_id }}</td>
+                                {% endif %}
+                                    
+                                <td>{{ value.val_id }}</td>
+                                <td>{{ value.val_sup }}</td>
+                                <td>{{ value.val_name }}</td>
+                                <td>{{ value.val_description }}</td>
+                                <td>{{ value.val_icon }}</td>
+                                <td>{{ value.val_order | default:"-" }}</td>
+                                <td>
+                                    <a href="{% url 'update-value' value.val_id %}" title="Editar({{value.val_name}})"><i class="bi bi-pencil-square text-dark" style="font-size: 20px;"></i></a>
+                                    <a href="#" title="Eliminar({{value.val_name}})"><i class="bi bi-trash-fill text-dark" style="font-size: 20px;"></i></a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <table id="myTable" class="display">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Superior</th>
-                    {% if not val_hierar %}
-                        <th>Jerarquia</th>
-                    {% endif %}
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Icono</th>
-                    <th>Orden</th>
-                    <th>Accion</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for value in list_value %}
-                    
-                    {% if value.val_id != 0 %}
-                        <tr>
-                            {% if not val_hierar %}
-                                <td>{{ value.hierar_id }}</td>
-                            {% endif %}
-                                
-                            <td>{{ value.val_id }}</td>
-                            <td>{{ value.val_sup }}</td>
-                            <td>{{ value.val_name }}</td>
-                            <td>{{ value.val_description }}</td>
-                            <td>{{ value.val_icon }}</td>
-                            <td>{{ value.val_order | default:"-" }}</td>
-                            <td>
-                                <a href="{% url 'update-value' value.val_id %}" title="Editar({{value.val_name}})"><i class="bi bi-pencil-square text-dark" style="font-size: 20px;"></i></a>
-                                <a href="#" title="Eliminar({{value.val_name}})"><i class="bi bi-trash-fill text-dark" style="font-size: 20px;"></i></a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 </div>
+
 
 {% endblock content %}   
 

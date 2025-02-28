@@ -6,6 +6,7 @@ urlpatterns = [
     path('create-hierar/', views.HierarchyCreateView.as_view(), name='create-hierarchy'),
     path('list-hierar/', views.HierarchyListView.as_view(), name='list-hierarchy'),
     path('update-hierar/<int:pk>/', views.HierarchyUpdateView.as_view(), name='update-hierarchy'),
+    path('delete-hierar/<int:pk>/', views.HierarchyDeleteView, name='delete-hierarchy'),
     
     #* ================= VALUE URLS ================== *#
     path('create-val/', views.ValueCreateView.as_view(), name='create-value'), 
@@ -18,4 +19,7 @@ urlpatterns = [
     path('create-pdt/', views.ProductCreateView.as_view(), name='create-product'), 
     path('list-pdt/', views.ProductListView.as_view(), name='list-product'),
     path('detail-pdt/<int:pk>/', views.ProductDetailView.as_view(), name='detail-product'),
+    
+    #* ================ SALE URLS ====================== *#
+    path('create-sale/', views.SaleCreateView.as_view(), name='create-sale'), 
 ]

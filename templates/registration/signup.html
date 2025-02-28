@@ -2,19 +2,50 @@
 
 
 {% block content %}
-    <h1>Registration</h1>
-    <form method="post" enctype="multipart/form-data"> 
-        {% csrf_token %}
-        <div class="card w-50">
-            <div class="row">
-                <div class="col-md-12 p-5">
-                    {{ form.as_p }} 
-                    {{ profile_form.as_p }} 
-                    <button type="submit">Registrarse</button> 
+    <div class="container style_sigup">
+        <div class="d-flex justify-content-center py-4">
+            <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="">
+                <span class="d-none d-lg-block">StockPro</span>
+            </a>
+        </div>
+        <form method="post" enctype="multipart/form-data" class="d-flex justify-content-center py-1"> 
+            {% csrf_token %}
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-12 p-5">
+                        {% for campo in form %}
+                            <div class="form-group">
+                                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                {{ campo }}
+                                {% if campo.help_text %}
+                                    <button type="button" onclick="mostrarAyuda('{{ campo.id_for_label }}')">?</button>
+                                    <div id="{{ campo.id_for_label }}_ayuda" class="ayuda">{{ campo.help_text }}</div>
+                                {% else %}
+                                
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                            
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100" type="submit">Registrarse</button>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <p class="small mb-0">¿Ya tienes una cuenta? <a href="{% url 'registrarse' %}">Iniciar sesión</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-    </form>
+        </form>
+    </div>
 {% endblock content %}
-    
+
+
+{% block scripts %}
+<script>
+    function mostrarAyuda(campoId) {
+        var ayuda = document.getElementById(campoId + "_ayuda");
+        ayuda.style.display = ayuda.style.display === "none" ? "block" : "none";
+    }
+</script>
+{% endblock scripts %}

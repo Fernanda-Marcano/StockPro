@@ -4,17 +4,17 @@
 
 {% block content %}
 <div class="container">
-    <div class="content d-flex justify-content-center py-1">
+    <div class="content">
         <div class="card w-50 style_card">
             <div class="card-body">
                 <h3 class="card-title style_title">{{ title }}</h3>
                 <form action="" method="post">
                     {% csrf_token %}
-                    {% for hierar in form_hierarchy %}
+                    {% for sale in form_sale %}
                         <div class="row">
                             <div class="col-md-12">
-                                {{ hierar.label_tag }}
-                                {{ hierar }}
+                                {{ sale.label_tag }}
+                                {{ sale }}
                             </div>
                         </div>
                     {% endfor %}

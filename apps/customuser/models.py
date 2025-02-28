@@ -13,11 +13,3 @@ class Profile(models.Model):
     image = models.ImageField(verbose_name='Imagen de Perfil', upload_to='user/img/', default='user/img/default-user.webp')
     user = models.OneToOneField(User, related_name='profile_user', on_delete=models.PROTECT)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile_user.save()

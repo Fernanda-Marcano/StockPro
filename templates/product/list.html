@@ -3,9 +3,17 @@
 {% block title %}{{title | upper}}{% endblock title %}
 
 {% block content %}
-    <ul>
+    <div class="container">
         {% for val in list_product %}
-            <li>{{ val }}</li>
+        <div class="cont_product">
+                <p>Nombre del Producto: {{ val }}</p>
+                <img src="{{ val.pdt_image.url }}" alt="Imagen del producto" srcset="">
+                <p>Precio: {{ val.pdt_price }}</p>
+                <p>Modelo: {{ val.pdt_model }}</p>
+                <p>Marca: {{ val.id_brand }}</p>
+                <button>Comprar</button>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+        
 {% endblock content %}

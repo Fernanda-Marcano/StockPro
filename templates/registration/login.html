@@ -2,16 +2,31 @@
 
 
 {% block content %}
-    <h1>Login</h1>
-    <form action="" method="post">
+<div class="container style_login">
+    <div class="d-flex justify-content-center py-4">
+        <a href="#" class="logo d-flex align-items-center w-auto">
+            <img src="assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">StockPro</span>
+        </a>
+    </div>
+    <form action="" method="post" class="d-flex justify-content-center py-1">
         {% csrf_token %}
-        <div class="card w-50 p-5">
+        <div class="card p-5">
+            <div>
+                <h5 class="text-primary text-center pb-0 fs-4">Iniciar sesión</h5>
+                <p class="text-center small">Ingrese su nombre de usuario y contraseña</p>
+            </div>
             {% for log in form %}
-                {{ log.label_tag }}
-                {{ log }}
+            {{ log.label_tag }}
+            {{ log }}
             {% endfor %}
-            <button type="submit">Login</button>
+            <div class="col-12">
+                <button class="btn btn-primary w-100" type="submit">Login</button>
+            </div>
+            <div class="col-12">
+                <p class="small mb-0">¿No tiene un cuenta? <a href="{% url 'registrarse' %}">Crear una cuenta</a></p>
+            </div>
         </div>
     </form>
+</div>
 {% endblock content %}
-    

@@ -1,0 +1,178 @@
+.style_title {
+    color: #f1f1f1;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.67rem;
+}
+
+.style_card {
+    background-color: #c7c9db62;
+    color: #f1f1f1; 
+    border: 1px solid #c9c6c6;
+}
+
+textarea {
+    resize: none;
+    height: 180px;
+}
+
+.style_card label {
+    margin-top: 5px;
+}
+
+.style_card input,
+.style_card textarea, 
+.style_card select {
+    background-color: #dce4e998;
+    color: #061735;
+}
+
+.style_card input:focus,
+.style_card textarea:focus, 
+.style_card select:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #f1f1f1;
+    background-color: #c7c9db62;
+}
+
+.style_button {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.style_button button {
+    width: 380px;
+    height: 2.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #dce4e998;
+    color: #f1f1f1;
+    font-size: 1.095rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.style_button button:hover {
+    background-color: #c9ccd1;
+    color: #1147a3;
+}
+
+.style_card_list {
+    background-color: #adb1d881;
+    color: #f1f1f1; 
+    border: 1px solid #c9c6c6;
+    padding: 15px;
+}
+
+.style_card_list select>option {
+    color: #061735;
+}
+
+.style_title_list {
+    background-color: transparent;
+    color: #f1f1f1;
+}
+
+.btnAdd {
+    color: #f1f1f1;
+    background-color: #1147a3;
+    border: 1px solid #c9c6c6;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.btnAdd:hover {
+    background-color: #2463d1;
+    box-shadow: 0 0 3px 1px #8191ad;
+}
+
+.btnAdd {
+    background-color: #2463d1;
+    box-shadow: 0 0 3px 1px #8191ad;
+}
+
+.cont_product {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 17.5rem;
+    background-color: transparent;
+    border: 1px solid #8191ad;
+    box-shadow: 0 0 6px 1px #8191ad5b;
+    padding: 10px;
+}
+
+.cont_product p {
+    font-size: .9rem;
+}
+
+.cont_product img {
+    width: 200px;
+    height: 200px;
+}
+
+.cont_product button {
+    background-color: #061735;
+    color: #f1f1f1;
+    width: 150px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    letter-spacing: 1px;
+}
+
+.cont_product button:hover {
+    background-color: #061735ce;
+    color: #c9c6c6;
+}
+
+.style_login form {
+    width: 100%;
+}
+
+.style_login label {
+    margin-top: 10px;
+
+}
+
+.style_login input {
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+}
+
+.style_login button {
+    margin: 15px 0;
+}
+
+.style_sigup form {
+    width: 100%;
+}
+
+.style_sigup .card {
+    width: 30vw;
+}
+
+.style_sigup label {
+    margin-top: 5px;
+}
+
+.ayuda {
+    display: none;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+
+.form-group button {
+    border-radius: 60%;
+    border: none;
+    margin: 2px 0 5px;
+}

@@ -12,6 +12,7 @@ class HierarchyForm(forms.ModelForm):
         for form in self.visible_fields():
             form.field.widget.attrs['class'] = 'form-control'
             form.field.widget.attrs['autocomplete'] = 'off'
+            #form.field.widget.attrs['resize'] = 'false'
     
     class Meta:
         """Meta definition for Hierarchyform."""
