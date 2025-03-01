@@ -1,0 +1,28 @@
+{% extends '../layouts/base.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="card style_profile">
+            <div class="card-body">
+                <div class="cont_detail">
+                    <div class="cont_img">
+                        <img src="{{ user.profile_user.image.url }}" alt="Imagen de perfil" >
+                    </div>
+                    <h2>{{ user.username }}</h2>
+                </div>
+                
+                <hr>
+                <h4>Email: {{ user.email }}</h4>
+                <h4>Nombre: {{ user.first_name }}</h4>
+                <h4>Apellido: {{ user.last_name }}</h4>
+                <hr>
+                <div class="button_a">
+                    <a href="{% url 'update-profile' %}">Actualizar Perfil</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}
+    

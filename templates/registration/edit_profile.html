@@ -1,14 +1,33 @@
 {% extends '../layouts/base.html' %}
 
 {% block content %} 
-    <h2>Editar Perfil</h2>
-    <form method="post" enctype="multipart/form-data" class="row"> 
-        {% csrf_token %} 
-        <div class="col-md-6">
-            {{ form.as_p }} 
-        </div>
-        {{ user_form.as_p }}
-        
-        <button type="submit">Guardar Cambios</button> 
-    </form> 
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" class="d-flex justify-content-center py-1">
+            <div class="card style_card w-50">
+                <div>
+                    <h5 class="text-center pb-0 fs-2 pt-4">Editar Perfil</h5>
+                </div>
+                <div class="card-body row">
+                    {% csrf_token %}
+                    <div class="cont_profile">
+                        {% for campo in user_form %}
+                            <div class="col-md-12">
+                                <label for="{{ campo.id_for_label }}">{{ campo.label_tag }}</label>
+                                {{ campo }}
+                            </div>
+                        {% endfor %}
+                        {% for campo in form %}
+                            <div class="col-md-12">
+                                <label for="{{ campo.id_for_label }}">{{ campo.label_tag }}</label>
+                                {{ campo }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="style_button">
+                        <button type="submit"><i class="bi bi-send-plus-fill" style="font-size: 1.2rem;"></i> Guardar Cambios</button>
+                    </div> 
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

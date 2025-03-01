@@ -176,3 +176,42 @@ textarea {
     border: none;
     margin: 2px 0 5px;
 }
+
+.style_profile {
+    width: 35%;
+}
+
+.style_profile .card-body {
+    margin: 20px;
+}
+
+.cont_detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont_img {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #061735;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.cont_img img {
+    width: 120px;
+    height: 120px;
+}
+
+.button_a {
+    background-color: #1147a3;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button_a a {
+    color: #f1f1f1;
+}
