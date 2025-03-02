@@ -19,7 +19,11 @@ urlpatterns = [
     path('create-pdt/', views.ProductCreateView.as_view(), name='create-product'), 
     path('list-pdt/', views.ProductListView.as_view(), name='list-product'),
     path('detail-pdt/<int:pk>/', views.ProductDetailView.as_view(), name='detail-product'),
+    path('update-pdt/<int:pk>/', views.ProductUpdateView.as_view(), name='update-product'), 
     
     #* ================ SALE URLS ====================== *#
     path('create-sale/', views.SaleCreateView.as_view(), name='create-sale'), 
+    
+    #* ================ INVENTORY URLS ====================== *#
+    path('inventory/', views.InventoryProductView.as_view(), name='inventory')
 ]

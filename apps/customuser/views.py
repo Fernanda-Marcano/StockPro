@@ -66,4 +66,4 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 def custom_logout(request):
     logout(request)
-    return redirect('list-hierarchy')
+    return redirect('list-product')

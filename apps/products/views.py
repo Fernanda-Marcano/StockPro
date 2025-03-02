@@ -9,7 +9,7 @@ from .forms import HierarchyForm, ValueForm, ProductForm, SaleForm
 
 
 #* ------------- Definition of views Hierarchy --------------- *#
-class HierarchyCreateView(CreateView):
+class HierarchyCreateView(LoginRequiredMixin, CreateView):
     model = Hierarchy
     form_class = HierarchyForm
     template_name = "hierarchy/form.html"
@@ -27,7 +27,7 @@ class HierarchyCreateView(CreateView):
             return redirect(to='list-hierarchy') 
 
 
-class HierarchyListView(ListView):
+class HierarchyListView(LoginRequiredMixin, ListView):
     model = Hierarchy
     template_name = "hierarchy/list.html"
     
@@ -49,7 +49,7 @@ def HierarchyDeleteView(request, pk):
     return redirect(to='list-hierarchy')
 
 
-class HierarchyUpdateView(UpdateView):
+class HierarchyUpdateView(LoginRequiredMixin, UpdateView):
     model = Hierarchy
     form_class = HierarchyForm
     template_name = "hierarchy/form.html"
@@ -64,7 +64,7 @@ class HierarchyUpdateView(UpdateView):
 
 
 #* ------------- Definition of views Value --------------- *#
-class ValueCreateView(CreateView):
+class ValueCreateView(LoginRequiredMixin, CreateView):
     model = Value
     form_class = ValueForm
     template_name = "value/form.html"
@@ -81,7 +81,7 @@ class ValueCreateView(CreateView):
             form.save()
             return redirect(to='list-hierarchy')
 
-class ValueCreateIdView(CreateView):
+class ValueCreateIdView(LoginRequiredMixin, CreateView):
     model = Value
     form_class = ValueForm
     template_name = "value/form.html"
@@ -100,7 +100,7 @@ class ValueCreateIdView(CreateView):
         return context
 
 
-class ValueListView(ListView):
+class ValueListView(LoginRequiredMixin, ListView):
     model = Value
     template_name = "value/list.html"
     
@@ -115,9 +115,10 @@ class ValueListView(ListView):
         return context
 
 
-class ValueListIdView(ListView): 
+class ValueListIdView(LoginRequiredMixin, ListView): 
     model = Value 
     template_name = "value/list.html" 
+    
     def get_queryset(self): 
         pk = self.kwargs.get('pk') 
         queryset = self.model.objects.filter(hierar_id=pk)
@@ -132,7 +133,7 @@ class ValueListIdView(ListView):
         return context
 
 
-class ValueUpdateView(UpdateView):
+class ValueUpdateView(LoginRequiredMixin, UpdateView):
     model = Value
     form_class = ValueForm
     template_name = "value/form.html"
@@ -152,7 +153,7 @@ class ValueUpdateView(UpdateView):
 
 
 #* ------------- Definition of views Product --------------- *#
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = "product/form.html"
@@ -189,18 +190,26 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = "product/detail.html"
     
-    def get_queryset(self, pk):
-        queryset = self.model.objects.get(pdt_id=pk)
+    def get_queryset(self):
+        pk = self.kwargs.get('pk') 
+        queryset = self.model.objects.filter(pdt_id=pk)
         return queryset
     
     def get_context_data(self, **kwargs):
-        context = {}
+        context = super().get_context_data(**kwargs)
         context['d_product'] = self.get_queryset()
+        context['sale_form'] = SaleForm()
         context['title'] = 'detalle del producto'
         return context
+    
+    def post(self, request, *args, **kwargs):
+        form = SaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list-product')
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = "product/form.html"
@@ -268,3 +277,17 @@ class SaleDetailView(DetailView):
         return context
 
 
+#* ------------- Definition of views Inventory --------------- *#
+class InventoryProductView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'inventory/list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = self.model.objects.all()
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['invent_product'] = self.get_queryset()
+        return context

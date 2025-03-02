@@ -106,8 +106,9 @@ textarea {
     padding: 10px;
 }
 
-.cont_product p {
+.cont_product a p {
     font-size: .9rem;
+    color: #f1f1f1;
 }
 
 .cont_product img {

@@ -153,5 +153,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'list-hierarchy'
-LOGOUT_REDIRECT_URL = 'list-hierarchy'
+LOGIN_REDIRECT_URL = 'list-product'
+LOGOUT_REDIRECT_URL = 'list-product'

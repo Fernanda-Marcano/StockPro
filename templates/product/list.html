@@ -6,13 +6,25 @@
     <div class="container">
         {% for val in list_product %}
         <div class="cont_product">
+            <a href="{% url 'detail-product' pk=val.pdt_id %}" class="a_color">
                 <p>Nombre del Producto: {{ val }}</p>
                 <img src="{{ val.pdt_image.url }}" alt="Imagen del producto" srcset="">
-                <p>Precio: {{ val.pdt_price }}</p>
+                <p>Precio: {{ val.pdt_price }}$</p>
                 <p>Modelo: {{ val.pdt_model }}</p>
                 <p>Marca: {{ val.id_brand }}</p>
-                <button>Comprar</button>
+            </a>
+            <div class="row">
+                <div class="col-6">
+                    <a href="{% url 'update-product' pk=val.pdt_id %}" title="Editar({{val.pdt_name}})">
+                        <i class="bi bi-pencil-square text-dark" style="font-size: 20px;"></i></a>
+                </div>
+                <div class="col-6">
+                    <a href="#" title="Eliminar({{val.pdt_name}})">
+                        <i class="bi bi-trash-fill text-dark" style="font-size: 20px;"></i></a>
+                </div>
             </div>
+            
+        </div>
         {% endfor %}
     </div>
         

@@ -1,0 +1,35 @@
+{% extends '../layouts/base.html' %}
+
+
+{% block title %} {{ title|upper }} {% endblock title %}
+    
+
+{% block content %}
+    <div class="container">
+        <h2 class="text-title style_title">{{ title }}</h2>
+        <div class="cont_detail_product">
+            <div class="row">
+                
+                {% for producto in d_product %}
+                    <div class="col-6 cont_img_product">
+                        <img src="{{ producto.pdt_image.url }}" alt="{{ producto.pdt_name }}">
+                    </div>
+                    <div class="col-6 cont_info">
+                        <h3>{{ producto.pdt_name }}</h3>
+                        <hr>
+                        <p><strong>Descripción:</strong> {{ producto.pdt_description }}</p>
+                        <div class="cont_form">
+                            <p><strong>Precio:</strong> {{ producto.pdt_price }}$</p>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ sale_form.sale_quantity.label_tag }}
+                                {{ sale_form.sale_quantity }}
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
