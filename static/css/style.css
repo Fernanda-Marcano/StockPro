@@ -216,3 +216,33 @@ textarea {
 .button_a a {
     color: #f1f1f1;
 }
+
+.cont_detail_product {
+    margin-top: 70px;
+}
+
+.cont_detail_product img {
+    width: 360px;
+    height: 360px;
+}
+
+.cont_detail_product h3 {
+    text-transform: uppercase;
+}
+
+.cont_form {
+    margin-top: 60px;
+}
+
+.cont_btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn_detail {
+    padding: 7px 0;
+    border: none;
+    width: 50%;
+    border-radius: 5px;
+}

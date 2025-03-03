@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import View, CreateView, UpdateView, DetailView, ListView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.db.models import Q
+from django.contrib import messages
 
 from .models import Hierarchy, Value, Product, Sale
 from .forms import HierarchyForm, ValueForm, ProductForm, SaleForm
@@ -21,10 +22,17 @@ class HierarchyCreateView(LoginRequiredMixin, CreateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-hierarchy') 
+        try:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Información creada exitosamente')
+                return redirect(to='list-hierarchy')
+            else:
+                messages.error(request, 'Ha ocurrido un error')
+                return render(request, self.template_name, {'form_hierarchy':form})
+        except Exception as e:
+            print(f'Se ha producido el siguiente error {e}')
 
 
 class HierarchyListView(LoginRequiredMixin, ListView):
@@ -43,11 +51,6 @@ class HierarchyListView(LoginRequiredMixin, ListView):
         context['form_hierarchy'] = HierarchyForm()
         return context
 
-def HierarchyDeleteView(request, pk):
-    hierar = Hierarchy.objects.get(hierar_id = pk)
-    hierar.delete()
-    return redirect(to='list-hierarchy')
-
 
 class HierarchyUpdateView(LoginRequiredMixin, UpdateView):
     model = Hierarchy
@@ -62,6 +65,14 @@ class HierarchyUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
+def HierarchyDeleteView(request, pk):
+    try:
+        hierar = Hierarchy.objects.get(hierar_id = pk)
+        hierar.delete()
+        messages.success(request, 'Eliminado correctamente')
+        return redirect(to='list-hierarchy')
+    except Exception as e:
+        print(f'Se ha producido el siguiente error {e}')
 
 #* ------------- Definition of views Value --------------- *#
 class ValueCreateView(LoginRequiredMixin, CreateView):
@@ -76,10 +87,17 @@ class ValueCreateView(LoginRequiredMixin, CreateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-hierarchy')
+        try:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Información creada exitosamente')
+                return redirect(to='list-hierarchy')
+            else:
+                messages.error(request, 'Ha ocurrido un error')
+                return render(request, self.template_name, {'form_value':form})
+        except Exception as e:
+            print(f'Se ha producido el siguiente error {e}')
 
 class ValueCreateIdView(LoginRequiredMixin, CreateView):
     model = Value
@@ -145,10 +163,27 @@ class ValueUpdateView(LoginRequiredMixin, UpdateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-hierarchy')
+        try:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Información actualizada exitosamente')
+                return redirect(to='list-hierarchy')
+            else:
+                messages.error(request, 'Ha ocurrido un error')
+                return render(request, self.template_name, {'form_value':form})
+        except Exception as e:
+            print(f'Ha ocurrido el siguiente error {e}')
+
+
+def ValueDeleteView(request, pk):
+    try:
+        val = Value.objects.get(val_id = pk)
+        val.delete()
+        messages.success(request, 'Eliminado correctamente')
+        return redirect(to='list-hierarchy')
+    except Exception as e:
+        print(f'Se ha producido el siguiente error {e}')
 
 
 
@@ -165,10 +200,14 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-product')
+        try:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Información creada exitosamente')
+                return redirect(to='list-product')
+        except Exception as e:
+            print(f'Ha ocurrido el siguiente error {e}')
 
 
 class ProductListView(ListView):
@@ -203,16 +242,24 @@ class ProductDetailView(DetailView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = SaleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list-product')
+        try:
+            form = SaleForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Producto agregado correctamente')
+                return redirect('list-product')
+            else:
+                messages.error(request, 'Ha ocurrido un error')
+                return render(request, 'product/detail.html', {'sale_form':form})
+        except Exception as e:
+            print(f'Ha ocurrido el siguiente error {e}')
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = "product/form.html"
+    success_url = reverse_lazy('list-product')
     
     def get_context_data(self, **kwargs):
         context = {}
@@ -221,47 +268,32 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-product')
+        try:
+            self.object = self.get_object()
+            form = self.get_form()
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Información actualizada exitosamente')
+                return redirect(to='list-product')
+            else:
+                print(form.errors)
+                messages.error(request, 'Ha ocurrido un error')
+                return render(request, self.template_name, {'form_product': form})
+        except Exception as e:
+            print(f'Ha ocurrido el siguiente error {e}')
+
+def DeleteProductView(request, pk):
+    try:
+        product = Product.objects.get(pdt_id=pk)
+        product.delete()
+        messages.success(request, 'Producto eliminado exitosamente')
+        return redirect(to='list-product')
+    except Exception as e:
+        print(f'Ha ocurrido un error {e}')
 
 
 
 #* ------------- Definition of views Sale --------------- *#
-class SaleCreateView(CreateView):
-    model = Sale
-    form_class = SaleForm
-    template_name = "sale/form.html"
-    
-    def get_context_data(self, **kwargs):
-        context = {}
-        context['form_sale'] = self.form_class
-        context['title'] = 'crear venta'
-        return context
-    
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to='list-sale')
-
-
-class SaleListView(ListView):
-    model = Sale
-    template_name = "sale/list.html"
-    
-    def get_queryset(self):
-        queryset = self.model.objects.all()
-        return queryset
-    
-    def get_context_data(self, **kwargs):
-        context = {}
-        context['list_sale'] = self.get_queryset()
-        context['title'] = 'lista de ventas'
-        return context
-
-
 class SaleDetailView(DetailView):
     model = Sale
     template_name = "sale/detail.html"
@@ -289,5 +321,6 @@ class InventoryProductView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['title'] = 'Inventario'
         context['invent_product'] = self.get_queryset()
         return context

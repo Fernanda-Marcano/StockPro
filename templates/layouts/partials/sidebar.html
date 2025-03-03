@@ -10,41 +10,45 @@
             </a>
         </li><!-- End Dashboard Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Jerarquía</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{% url 'create-hierarchy' %}">
-                        <i class="bi bi-circle"></i><span>Crear Jerarquía</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'list-hierarchy' %}">
-                        <i class="bi bi-circle"></i><span>Lista de Jerarquías</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Components Nav -->
+        
+        {% if user.username == 'Admin' %}
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Jerarquía</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'create-hierarchy' %}">
+                            <i class="bi bi-circle"></i><span>Crear Jerarquía</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'list-hierarchy' %}">
+                            <i class="bi bi-circle"></i><span>Lista de Jerarquías</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
+            
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Valor</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{% url 'create-value' %}">
-                        <i class="bi bi-circle"></i><span>Crear valor</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'list-value' %}">
-                        <i class="bi bi-circle"></i><span>Lista de valores</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Forms Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Valor</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'create-value' %}">
+                            <i class="bi bi-circle"></i><span>Crear valor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'list-value' %}">
+                            <i class="bi bi-circle"></i><span>Lista de valores</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+        {% endif %}
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -71,13 +75,8 @@
             </a>
             <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{% url 'create-sale' %}">
-                        <i class="bi bi-circle"></i><span>Crear Venta</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#">
-                        <i class="bi bi-circle"></i><span>ApexCharts</span>
+                        <i class="bi bi-circle"></i><span>Ventas</span>
                     </a>
                 </li>
             </ul>

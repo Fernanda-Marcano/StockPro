@@ -1,12 +1,82 @@
 {% extends '../layouts/base.html' %}
+{% load static %}
 
+{% block title %}{{ title }}{% endblock title %}
+
+{% block head %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'librerias/DataTables/datatables.min.css' %}">
+    <script src="{% static 'librerias/DataTables/datatables.min.js' %}"></script>
+{% endblock head %}
 
 {% block content %}
     <h1>Inventario</h1>
     
-    {% for campo in invent_product %}
-        {{ campo }}
-    {% endfor %}
+    <div class="container">
+        <div class="card style_card_list">
+            <div class="card-body">
+                <table id="myTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Model</th>
+                            <th>Serial</th>
+                            <th>Stock</th>
+                            <th>Imagen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for invent in invent_product %}
+                        <tr>
+                            <td>{{ invent.pdt_id }}</td>
+                            <td>{{ invent.pdt_name }}</td>
+                            <td>{{ invent.pdt_model }}</td>
+                            <td>{{ invent.pdt_serial }}</td>
+                            <td>{{ invent.pdt_stock }}</td>
+                            <td>
+                                <img src="{{ invent.pdt_image.url }}" alt="" width="50px" height="50px">
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
         
 {% endblock content %}
+
+
+{% block scripts %}
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                responsive: true,
+                dom: '<"top"lfB>rt<"bottom"ip><"clear">',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="bi bi-file-pdf-fill"></i>',
+                        className: 'btn-pdf'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="bi bi-file-excel-fill"></i>',
+                        className: 'btn-excel',
+                    },
+                    {
+                        extend: 'copyHtml5',
+                        text: '<i class="bi bi-copy"></i>',
+                        className: 'btn-copy',
+                    }
+                ],
+                "language": {
+                    url: '{% static "librerias/Datatables/spanish.txt" %}'
+                }
+            });
+        })
+    </script>
+{% endblock scripts %}
     
